@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d0c0b">
+<style>html{background:#0d0c0b;color-scheme:dark}html[data-theme=light]{background:#f4f1ec;color-scheme:light}</style>
+<script>try{if(localStorage.getItem('ag_theme')==='light'){document.documentElement.dataset.theme='light';document.querySelector('meta[name="theme-color"]').content='#f4f1ec';}}catch(e){}</script>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<title>Elige tus asientos · Arena Gallo</title>
+</head>
+<body data-solid-header="1" data-no-footer="1">
+<div class="sel">
+  <div class="stage" id="stage">
+    <canvas id="c" aria-label="Recinto en 3D: elige una sección y tus asientos"></canvas>
+    <div class="topbar">
+      <a class="btn btn-ghost btn-sm" id="back" href="/eventos.html">← Evento</a>
+      <div class="filters" id="filters" role="group" aria-label="Filtrar por zona"></div>
+    </div>
+    <div class="viewbar">
+      <button class="btn btn-ghost btn-sm" id="btnOverview" type="button">Vista general</button>
+      <button class="btn btn-ghost btn-sm" id="btnSeatView" type="button" disabled>Ver desde mi asiento</button>
+      <span class="hint" id="hint">Arrastra para girar · rueda para acercar · toca una sección</span>
+    </div>
+    <div class="tip" id="tip" role="status"></div>
+    <div class="pov" id="pov" role="status" aria-live="polite"></div>
+    <div class="loading" id="loading" role="status"><div class="load-mark" id="loadMark"></div>Preparando el recinto 3D…</div>
+  </div>
+  <aside class="side" id="side" aria-label="Tu selección">
+    <button class="grab" id="grab" type="button" aria-label="Expandir panel"></button>
+    <div class="side-in" id="sideIn"></div>
+  </aside>
+</div>
+
+<div class="modal" id="checkout" role="dialog" aria-modal="true" aria-labelledby="coTitle">
+  <div class="box" id="coBox"></div>
+</div>
+<script type="module" src="/src/pages/asientos.js"></script>
+</body>
+</html>

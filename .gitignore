@@ -1,0 +1,7 @@
+node_modules/
+dist/
+renders/
+media/
+gemini_generated_video_*.mp4
+.DS_Store
+.claude/
