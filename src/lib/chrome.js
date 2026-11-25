@@ -2,6 +2,7 @@
 import { getTickets } from './store.js';
 import { nextEvent, demoMode } from './events.js';
 import { logoRow } from './brand.js';
+import { SOCIAL, PAGINAS } from './oficial.js';
 
 
 /* ── tema claro / oscuro (se recuerda en este navegador) ── */
@@ -49,6 +50,24 @@ function themeButton() {
   return b;
 }
 
+/* menú con todas las páginas (en pantallas medianas y celular, donde no caben en la barra) */
+function menuButton(active) {
+  const b = document.createElement('button');
+  b.type = 'button'; b.className = 'menu-btn'; b.setAttribute('aria-expanded', 'false'); b.setAttribute('aria-controls', 'menuPanel');
+  b.setAttribute('aria-label', 'Abrir menú');
+  b.innerHTML = '<svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg>';
+  const panel = document.createElement('div');
+  panel.className = 'menu-panel'; panel.id = 'menuPanel'; panel.hidden = true;
+  const items = [['eventos', 'Eventos', '/eventos.html'], ...PAGINAS, ['boletos', 'Mis boletos', '/boletos.html']];
+  panel.innerHTML = `<nav aria-label="Todas las páginas">${items.map(([id, t, u]) => `<a href="${u}" class="${active === id ? 'on' : ''}">${t}</a>`).join('')}</nav>`;
+  const set = (open) => { panel.hidden = !open; b.setAttribute('aria-expanded', String(open)); b.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú'); };
+  b.addEventListener('click', (e) => { e.stopPropagation(); set(panel.hidden); });
+  document.addEventListener('click', (e) => { if (!panel.hidden && !panel.contains(e.target)) set(false); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !panel.hidden) { set(false); b.focus(); } });
+  queueMicrotask(() => b.closest('.hdr').append(panel));
+  return b;
+}
+
 export function mountChrome(active = '', { cta = true } = {}) {
   const ev = nextEvent();
   const n = getTickets().length;
@@ -58,11 +77,11 @@ export function mountChrome(active = '', { cta = true } = {}) {
     <a class="brand" href="/index.html" aria-label="Arena Gallo, inicio">${logoRow({ title: '' }).replace('role="img" aria-label=""', 'aria-hidden="true"')}</a>
     <nav class="nav" aria-label="Principal">
       <a href="/eventos.html" class="${active === 'eventos' ? 'on' : ''}" ${active === 'eventos' ? 'aria-current="page"' : ''}>Eventos</a>
-      <a href="/index.html#recinto" class="hide-sm ${active === 'recinto' ? 'on' : ''}">El recinto</a>
+      ${PAGINAS.map(([id, t, u]) => `<a href="${u}" class="hide-md ${active === id ? 'on' : ''}" ${active === id ? 'aria-current="page"' : ''}>${t}</a>`).join('')}
       <a href="/boletos.html" class="${active === 'boletos' ? 'on' : ''}" ${active === 'boletos' ? 'aria-current="page"' : ''}>Mis boletos${n ? `<span class="badge" aria-label="${n} boletos">${n}</span>` : ''}</a>
-      ${cta ? `<a class="btn btn-red btn-sm hide-sm" href="/evento.html?id=${ev.id}">Boletos para ${ev.name}</a>` : ''}
+      ${cta ? `<a class="btn btn-red btn-sm hide-sm" href="/evento.html?id=${ev.id}" aria-label="Boletos para ${ev.name}">Boletos<span class="cta-long">&nbsp;para ${ev.name}</span></a>` : ''}
     </nav>`;
-  hdr.querySelector('.nav').append(themeButton());
+  hdr.querySelector('.nav').append(themeButton(), menuButton(active));
   document.body.prepend(hdr);
   // marca de agua de la demostración (sobre toda la página, no estorba al tacto)
   if (!document.querySelector('.wm')) { const wm = document.createElement('div'); wm.className = 'wm'; wm.setAttribute('aria-hidden', 'true'); document.body.append(wm); }
@@ -77,7 +96,14 @@ export function mountChrome(active = '', { cta = true } = {}) {
   foot.innerHTML = `
     <div>
       <div class="brand-l">${logoRow({ title: 'Arena Gallo' })}</div>
-      <p>Ciudad Cayalá, zona 16, Ciudad de Guatemala.<br>Sitio de demostración: los eventos, fechas y precios son de ejemplo y ningún pago es real.</p>
+      <p>Ciudad Cayalá, zona 16, Ciudad de Guatemala.<br>Sitio de demostración: los eventos, fechas y precios son de ejemplo y ningún pago es real. Imágenes con fines ilustrativos.</p>
+      <nav class="foot-links" aria-label="Arena Gallo"><a href="/eventos.html">Eventos</a>${PAGINAS.map(([, t, u]) => `<a href="${u}">${t}</a>`).join('')}<a href="/boletos.html">Mis boletos</a></nav>
+      <div class="social">
+        <a href="${SOCIAL.facebook}" target="_blank" rel="noopener" aria-label="Arena Gallo en Facebook"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4A21 21 0 0 0 14.3 4c-2.3 0-3.9 1.4-3.9 4v2.5H7.8v3h2.6V21z"/></svg></a>
+        <a href="${SOCIAL.instagram}" target="_blank" rel="noopener" aria-label="Arena Gallo en Instagram"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".9" fill="currentColor" stroke="none"/></svg></a>
+        <a href="${SOCIAL.youtube}" target="_blank" rel="noopener" aria-label="Arena Gallo en YouTube"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4a2.5 2.5 0 0 0-1.8 1.8C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 0 0 1.8 1.8c1.6.4 7.8.4 7.8.4s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8c.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8zM10 15V9l5.2 3z"/></svg></a>
+        <a href="${SOCIAL.linkedin}" target="_blank" rel="noopener" aria-label="Arena Gallo en LinkedIn"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M6.9 8.8H3.8V20h3.1zM5.3 3.9a1.8 1.8 0 1 0 0 3.6 1.8 1.8 0 0 0 0-3.6zM20.2 13.6c0-3-1.6-4.9-4.3-4.9-1.4 0-2.4.8-2.8 1.5V8.8H10V20h3.1v-5.6c0-1.5.6-2.7 2.1-2.7s1.9 1.3 1.9 2.8V20h3.1z"/></svg></a>
+      </div>
     </div>
     <div class="demo-switch" role="group" aria-label="Simular estado de venta">
       <span>Simular venta</span>

@@ -16,7 +16,7 @@ function band(d0, d1, a0, a1, n = 10) {
 }
 const ZONES = [
   { id: 'lower', d0: 3.5, d1: 15.4, n: 24 },
-  { id: 'suites', d0: 16.6, d1: 21.2, n: 50 },
+  { id: 'suites', d0: 16.6, d1: 21.2, n: 22 },
   { id: 'club', d0: 22.6, d1: 28, n: 20 },
   { id: 'upper', d0: 30.6, d1: 36.9, n: 26 },
 ];

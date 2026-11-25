@@ -51,7 +51,7 @@ export const LEVELS = {
   suites: {
     id: 'suites', name: 'Suites VIP', code: 'S', color: '#ffcf6b',
     d0: 16.8, depth: 4.4, floorY: 7.7, height: 3.1,
-    count: 50, perSuite: 10, price: 2400, sold: 0.7,
+    count: 22, perSuite: 16, price: 2400, sold: 0.7, // 22 suites, como en la página oficial
   },
   ga: {
     id: 'ga', name: 'Pista General', code: 'GA', color: '#f4efe6',

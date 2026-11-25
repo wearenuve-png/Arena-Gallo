@@ -15,6 +15,12 @@ export default {
         evento: resolve('evento.html'),
         asientos: resolve('asientos.html'),
         boletos: resolve('boletos.html'),
+        arena: resolve('arena.html'),
+        espacios: resolve('espacios.html'),
+        ubicacion: resolve('ubicacion.html'),
+        nosotros: resolve('nosotros.html'),
+        alianzas: resolve('alianzas.html'),
+        contacto: resolve('contacto.html'),
       },
     },
   },
@@ -26,7 +32,7 @@ export default {
       enforce: 'pre',
       transform(code, id) {
         if (BASE === '/' || !/\/src\/.*\.js$/.test(id)) return null;
-        const out = code.replace(/(['"`])\/(media\/|assets\/|eventos\.html|evento\.html|asientos\.html|boletos\.html|index\.html)/g, `$1${BASE}$2`);
+        const out = code.replace(/(['"`])\/(media\/|assets\/|[a-z-]+\.html)/g, `$1${BASE}$2`);
         return out === code ? null : { code: out, map: null };
       },
     },

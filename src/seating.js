@@ -482,13 +482,14 @@ export function buildInterior(opts = {}) {
       const trim = new THREE.BoxGeometry(w + 0.2, 0.1, 0.1); trim.translate(0, h - 0.02, dp / 2 + 0.1); part(trim, suiteGold);
       const rail = new THREE.BoxGeometry(w, 1.0, 0.05); rail.translate(0, 0.5, dp / 2 - 0.05); part(rail, suiteGlass);
 
-      // asientos (2 filas × 5)
+      // asientos: 2 filas, tantas columnas como quepan a lo ancho de la suite
+      const cols = Math.max(5, Math.round(L.perSuite / 2));
       const pSuite = rand();
       const fully = pSuite < L.sold * 0.9;
       const partial = !fully && pSuite < L.sold;
       for (let r = 0; r < 2; r++) {
-        for (let c = 0; c < 5; c++) {
-          const lx = -w / 2 + (w * (c + 0.5)) / 5;
+        for (let c = 0; c < cols; c++) {
+          const lx = -w / 2 + (w * (c + 0.5)) / cols;
           const lz = r === 0 ? dp / 2 - 1.15 : dp / 2 - 2.55;
           const ly = r === 0 ? 0.0 : 0.38;
           const wp = new THREE.Vector3(lx, ly, lz).applyMatrix4(m);

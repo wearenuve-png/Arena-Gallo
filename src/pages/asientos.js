@@ -482,7 +482,7 @@ function renderPanel() {
       <h2 class="sp-sec">${focus.kind === 'suite' ? focus.name : 'Sección ' + focus.id}</h2>
       <p class="sp-sub"><span class="zdot" style="background:${col}"></span>${LNAME[focus.level.id]} · ${focus.avail} de ${focus.total} libres</p>
       <p class="sp-price">${range}<small>${focus.kind === 'suite' ? 'por asiento' : 'según la fila'}</small></p>
-      ${focus.kind === 'suite' && free ? `<button class="btn btn-ghost" type="button" data-suite style="margin-top:14px;width:100%">Reservar la suite completa (${Math.min(free, MAX_TICKETS)} asientos)</button>` : ''}
+      ${focus.kind === 'suite' && free ? `<button class="btn btn-ghost" type="button" data-suite style="margin-top:14px;width:100%">Reservar la suite completa (${free} asientos)</button>` : ''}
       ${qtyRow()}
       ${free ? `<button class="btn btn-ghost" type="button" data-best style="margin-top:10px;width:100%">${qty === 1 ? 'Elegir el mejor de esta sección' : `Elegir los ${qty} mejores de esta sección`}</button>` : ''}
       <div class="legend" aria-label="Leyenda"><span><i style="background:${col}"></i>Libre</span><span><i style="background:#2a2a31;box-shadow:inset 0 0 0 1px #4a453f"></i>Ocupado</span><span><i style="background:#ffc53d;box-shadow:0 0 8px rgba(255,197,61,.6)"></i>Tu selección</span></div>
@@ -500,7 +500,7 @@ function renderPanel() {
     <p class="sp-when">${fecha(ev.date)} · ${hora(ev.date)} · puertas ${ev.doors}</p>
     <div>${sale}</div>
     ${ctx}
-    <h2 class="sp-h">Tu selección <span>${cart.length} de ${MAX_TICKETS}</span></h2>
+    <h2 class="sp-h">Tu selección <span>${cart.length} de ${Math.max(MAX_TICKETS, cart.length)}</span></h2>
     <div>${cart.length ? cart.map((i) => `
       <div class="cartrow"><div style="min-width:0"><div style="font-size:14px;font-weight:650">${i.label}</div><small class="muted2">${LNAME[i.level]}</small></div>
       <b>${fmtQ(i.price)}</b>
@@ -521,7 +521,7 @@ function renderPanel() {
   sideIn.querySelectorAll('[data-eye]').forEach((b) => b.addEventListener('click', () => { const s2 = findSeat(b.dataset.eye); lastSeat = s2; seatView(s2); }));
   const suiteBtn = sideIn.querySelector('[data-suite]');
   if (suiteBtn) suiteBtn.addEventListener('click', () => {
-    const pick = focus.seats.filter((x) => !x.sold).slice(0, MAX_TICKETS - gaCount());
+    const pick = focus.seats.filter((x) => !x.sold); // una suite se reserva completa (puede pasar el máximo normal)
     if (!pick.length) return;
     qty = pick.length; setGroup(pick, pick[0]); seatView(pick[0]);
   });

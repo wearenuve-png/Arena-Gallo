@@ -6,6 +6,7 @@ const T = (s) => Date.parse(s);
 export const TYPES = [
   { id: 'conciertos', label: 'Conciertos', single: 'Concierto', color: '#ff4d5e', icon: 'M12 3a3 3 0 0 1 3 3v5a3 3 0 0 1-6 0V6a3 3 0 0 1 3-3zM6 11a6 6 0 0 0 12 0M12 17v4M9 21h6' },
   { id: 'deportes', label: 'Deportes', single: 'Deportes', color: '#6fa2ec', icon: 'M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18zM3 12h18M12 3v18M5.6 5.6c3.5 3.5 3.5 9.3 0 12.8M18.4 5.6c-3.5 3.5-3.5 9.3 0 12.8' },
+  { id: 'culturales', label: 'Culturales', single: 'Cultural', color: '#f08fb0', icon: 'M5 4h14v7a7 7 0 0 1-14 0zM9 9h.01M15 9h.01M9 13.5c1.6 1.4 4.4 1.4 6 0' },
   { id: 'familia', label: 'Familia', single: 'Familia', color: '#ffcf6b', icon: 'M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z' },
   { id: 'comedia', label: 'Comedia', single: 'Comedia', color: '#f5a05a', icon: 'M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18zM8 14c1 1.5 2.4 2.2 4 2.2s3-.7 4-2.2M9 9.5h.01M15 9.5h.01' },
   { id: 'festivales', label: 'Festivales', single: 'Festival', color: '#b98cf0', icon: 'M2 12c2-4 4-4 6 0s4 4 6 0 4-4 6 0M2 17c2-4 4-4 6 0s4 4 6 0 4-4 6 0M2 7c2-4 4-4 6 0s4 4 6 0 4-4 6 0' },
@@ -50,6 +51,12 @@ export const EVENTS = [
     blurb: 'En vivo en Arena Gallo. Una noche de reguetón con producción completa de luces y pantallas.',
     prices: P([3200, 3200], [1600, 1250], [1800, 1800], [650, 450], [900, 900]),
     windows: [{ name: 'Venta general', open: T('2026-11-15T10:00:00-06:00'), close: T('2027-01-15T18:00:00-06:00') }],
+  },
+  {
+    id: 'sinfonica', name: 'Gala Sinfónica', tipo: 'culturales', date: T('2027-01-23T20:00:00-06:00'), doors: '7:00 PM', age: 'Todas las edades',
+    blurb: 'Orquesta y coro en vivo en la acústica de Arena Gallo: un programa de grandes obras clásicas y bandas sonoras.',
+    prices: P([2000, 2000], [750, 520], [900, 900], [320, 220], [400, 400]),
+    windows: [{ name: 'Venta general', open: T('2026-11-20T10:00:00-06:00'), close: T('2027-01-23T18:00:00-06:00') }],
   },
   {
     id: 'voleibol', name: 'Final de Voleibol', tipo: 'deportes', date: T('2027-01-17T17:00:00-06:00'), doors: '3:30 PM', age: 'Todas las edades',

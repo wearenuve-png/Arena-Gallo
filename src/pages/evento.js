@@ -15,7 +15,7 @@ const range = (k) => { const [a, b] = ev.prices[k]; return a === b ? fmtQ(a) : `
 const ARROW = '<svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5"/></svg>';
 
 const ZONES = [
-  ['suites', 'Suites VIP', '#ffcf6b', 'Palco privado de 10 asientos'],
+  ['suites', 'Suites VIP', '#ffcf6b', '22 suites privadas de 16 asientos'],
   ['lower', 'Platea Baja', '#e0182d', '14 filas, lo más cerca del escenario'],
   ['club', 'Club Gallo', '#f08a24', '6 filas en el nivel intermedio'],
   ['ga', 'Pista General', '#f4efe6', 'De pie, frente al escenario'],

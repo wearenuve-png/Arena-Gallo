@@ -19,7 +19,7 @@
 /* colores de noche (tema oscuro). En el tema claro, lo que va sobre video, fotos o el 3D
    (cabecera transparente, recorrido, portadas, carteles, el recinto en 3D) se queda con estos colores. */
 :root,
-:root[data-theme="light"] :is(.hdr:not(.solid), .rec, .intro, .ev-hero, .evcard .poster, .next-poster, .cat, .pov-cta, .stage) {
+:root[data-theme="light"] :is(.hdr:not(.solid), .rec, .intro, .ev-hero, .evcard .poster, .next-poster, .cat, .pov-cta, .stage, .impact, .eco-band, .pg-hero, .band, .cards li, .rail figure) {
   --bg: #0d0c0b;
   --panel: #151412;
   --panel2: #1c1b18;
@@ -50,7 +50,7 @@
   --off-ink: #4a453f;
   color-scheme: dark;
 }
-:root[data-theme="light"] :is(.hdr:not(.solid), .rec, .intro, .ev-hero, .evcard .poster, .next-poster, .cat, .pov-cta, .stage) { color: var(--text); }
+:root[data-theme="light"] :is(.hdr:not(.solid), .rec, .intro, .ev-hero, .evcard .poster, .next-poster, .cat, .pov-cta, .stage, .impact, .eco-band, .pg-hero, .band, .cards li, .rail figure) { color: var(--text); }
 /* tema claro: papel cálido, tinta casi negra y el mismo rojo de marca */
 :root[data-theme="light"] {
   --bg: #f4f1ec;
@@ -109,7 +109,7 @@ p { text-wrap: pretty; }
 .brand .ag-logo { height: 44px; width: auto; display: block; }
 .ag-logo { overflow: visible; }
 .brand-dot { width: 30px; height: 30px; border-radius: 50%; background: var(--red); display: grid; place-items: center; flex: none; }
-.nav { display: flex; align-items: center; gap: clamp(16px, 2.4vw, 32px); font-size: 15px; }
+.nav { display: flex; align-items: center; gap: clamp(14px, 1.5vw, 28px); font-size: 15px; }
 .nav a { color: var(--muted); text-decoration: none; white-space: nowrap; transition: color .15s; position: relative; }
 .nav a:hover, .nav a.on { color: var(--hi); }
 .nav a.on::after { content: ''; position: absolute; left: 0; right: 0; bottom: -7px; height: 2px; background: var(--red); }
@@ -121,6 +121,18 @@ p { text-wrap: pretty; }
   .nav .hide-sm { display: none; }
   .brand .ag-logo { height: 34px; }
 }
+
+/* ── menú de todas las páginas ── */
+.menu-btn { display: none; width: 38px; height: 38px; flex: none; place-items: center; padding: 0; border-radius: var(--r-sm); border: 1px solid var(--line2); background: none; color: var(--text); cursor: pointer; }
+.menu-btn:hover { border-color: var(--line3); background: var(--tint); }
+.menu-panel { position: absolute; right: var(--pad); top: calc(var(--hdr) - 4px); min-width: 230px; padding: 8px; border-radius: 12px; background: var(--panel); border: 1px solid var(--line2); box-shadow: 0 18px 50px rgba(0,0,0,.35); animation: rise .25s var(--ease); }
+.menu-panel nav { display: flex; flex-direction: column; }
+.menu-panel a { padding: 11px 12px; border-radius: 8px; color: var(--text); text-decoration: none; font-size: 15px; font-weight: 600; }
+.menu-panel a:hover, .menu-panel a.on { background: var(--panel2); color: var(--hi); }
+/* todas las páginas caben en la barra en pantallas anchas; en las demás van en el menú */
+@media (max-width: 1500px) { .nav .cta-long { display: none; } }
+@media (max-width: 1240px) { .nav { gap: 14px; font-size: 14px; } }
+@media (max-width: 1000px) { .nav .hide-md { display: none; } .menu-btn { display: grid; } }
 
 /* ── botón de tema claro / oscuro ── */
 .theme-btn { width: 38px; height: 38px; flex: none; display: grid; place-items: center; padding: 0; border-radius: var(--r-sm); border: 1px solid var(--line2); background: none; color: var(--muted); cursor: pointer; transition: color .15s, border-color .15s, background-color .15s, transform .12s var(--ease); }
@@ -221,6 +233,13 @@ p { text-wrap: pretty; }
 .demo-switch a { text-decoration: none; height: 32px; display: inline-flex; align-items: center; padding: 0 11px; border-radius: 6px; border: 1px solid var(--line2); color: var(--muted); }
 .demo-switch a:hover { border-color: var(--line3); color: var(--hi); }
 .demo-switch a.on { background: var(--text); border-color: var(--text); color: var(--bg); font-weight: 650; }
+.foot-links { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: baseline; margin-top: 16px; font-size: 13px; }
+.foot-links span { color: var(--muted2); font-weight: 600; }
+.foot-links a { color: var(--muted); text-decoration: none; }
+.foot-links a:hover { color: var(--hi); text-decoration: underline; }
+.social { display: flex; gap: 8px; margin-top: 16px; }
+.social a { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--line2); color: var(--muted); transition: color .15s, border-color .15s, background-color .15s; }
+.social a:hover { color: var(--hi); border-color: var(--line3); background: var(--tint); }
 @media (max-width: 760px) { .foot { grid-template-columns: 1fr; align-items: start; } }
 
 /* ── modal ── */

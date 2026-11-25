@@ -1,10 +1,12 @@
 import '../styles/base.css';
 import '../styles/home.css';
+import '../styles/sitio.css';
 import { mountChrome } from '../lib/chrome.js';
 import { mountSaleBox } from '../lib/salebox.js';
 import { nextEvent, upcoming, TYPES, typeById, fecha, hora, dayLabel, diaMes } from '../lib/events.js';
 import { evImg } from '../lib/media.js';
-import { logoStack } from '../lib/brand.js';
+import { logoStack, logoMark } from '../lib/brand.js';
+import { OFICIAL, VIDEO, CIFRAS } from '../lib/oficial.js';
 
 mountChrome('');
 
@@ -56,7 +58,7 @@ const PHASES = [
   { from: 15.2, label: 'Lobby', title: 'Pasa directo<br>con tu QR.', sub: 'Torniquetes rápidos, food halls y todo a la vista.' },
   { from: 22.2, label: 'Túnel', title: 'Ya casi.', sub: 'Escucha cómo suena desde adentro.' },
   { from: 25.6, label: 'Interior', title: '14,500<br>a la vez.', sub: 'Así se ve Arena Gallo en una noche llena.' },
-  { from: 28.8, label: 'Vista aérea', title: 'Elige<br>tu lugar.', sub: 'Tres niveles, 50 suites y la pista. Mira cada sección antes de comprar.' },
+  { from: 28.8, label: 'Vista aérea', title: 'Elige<br>tu lugar.', sub: 'Tres niveles, 22 suites y la pista. Mira cada sección antes de comprar.' },
 ];
 const DUR = 41.6; // duración del recorrido (el video real la confirma al cargar)
 rail.innerHTML = PHASES.map((p, i) => `<li style="left:${i === PHASES.length - 1 ? 100 : (p.from / DUR) * 100}%">${p.label}</li>`).join('');
@@ -190,21 +192,36 @@ document.getElementById('tipos').innerHTML = `
         <span class="cat-next">${n ? `${list[0].name} · ${fecha(list[0].date)}` : 'Pronto anunciamos fechas'}</span></span>
     </a></li>`; }).join('')}</ul>`;
 
-/* ═══════ El recinto ═══════ */
+/* ═══════ La arena (portada oficial: video, frase y cifras) ═══════ */
 document.getElementById('recinto').innerHTML = `
-  <div class="venue">
-    <figure>
-      <img src="/media/arena-foto.jpg" alt="Vista aérea de Arena Gallo al atardecer, con el parqueo y la colina detrás" width="1280" height="720" loading="lazy">
-      <figcaption>Arena Gallo desde el norte, Ciudad Cayalá.</figcaption>
-    </figure>
-    <div>
-      <h2 class="h-sec">Una arena de clase mundial en Cayalá.</h2>
-      <dl class="specs">
-        <div><dt>Capacidad</dt><dd><b>14,500</b>personas</dd></div>
-        <div><dt>Suites VIP</dt><dd><b>50</b>con 10 asientos cada una</dd></div>
-        <div><dt>Niveles</dt><dd>Platea Baja, Club Gallo, Platea Alta y pista</dd></div>
-        <div><dt>Comida y bebida</dt><dd><b>36+</b>puntos de venta en 2 food halls</dd></div>
-      </dl>
-      <a class="btn btn-red" href="${seatUrl()}">Recorrer el recinto en 3D <span class="arr">${ARROW}</span></a>
-    </div>
+  <div class="sec-head"><div><p class="kicker-up">Arena Gallo</p><h2 class="h-sec">Una arena de clase mundial en el corazón de Guatemala, que redefine el entretenimiento en Centroamérica.</h2></div></div>
+  <div class="yt" id="yt" style="margin-top:32px;background-image:url('${VIDEO.poster}')">
+    <button type="button" aria-label="Reproducir el video de Arena Gallo"><span><svg width="30" height="30" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg></span></button>
+  </div>
+  <dl class="cifras">${CIFRAS.map(([n, t, pre]) => `<div><small>${pre || '&nbsp;'}</small><b>${n}</b><span>${t}</span></div>`).join('')}</dl>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:30px">
+    <a class="btn btn-red" href="${seatUrl()}">Recorrer la arena en 3D <span class="arr">${ARROW}</span></a>
+    <a class="btn btn-ghost" href="/arena.html">Conoce la arena <span class="arr">${ARROW}</span></a>
   </div>`;
+// el video oficial se carga al tocarlo (no pesa mientras no se ve)
+document.querySelector('#yt button').addEventListener('click', (e) => {
+  const box = e.currentTarget.parentElement;
+  box.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${VIDEO.youtube}?autoplay=1&rel=0&playsinline=1" title="Arena Gallo" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
+});
+
+/* ═══════ Creemos en vivirlo en grande (portada oficial: lounge, lobby, club lounge VIP) ═══════ */
+document.getElementById('vivir').innerHTML = `
+  <div class="split">
+    <div><p class="kicker-up">Es aquí, donde los grandes momentos comienzan</p><h2 class="h-sec">Creemos en vivirlo en grande</h2></div>
+    <ul class="manif"><li>Donde las emociones compartidas se transforman.</li><li>Donde los grandes momentos no solo se viven, se sienten.</li><li>Celebramos, conectamos y damos vida a lo extraordinario.</li></ul>
+  </div>
+  <div class="rail" aria-label="Espacios de la arena">
+    ${[['Club lounge VIP', OFICIAL.home.clubLounge], ['Lounge', OFICIAL.home.lounge], ['Lobby', OFICIAL.home.lobby]].map(([t, src]) => `<figure><img src="${src}" alt="${t} de Arena Gallo" width="1920" height="800" loading="lazy" decoding="async"><figcaption>${t}</figcaption></figure>`).join('')}
+  </div>
+  <a class="btn btn-ghost" style="margin-top:22px" href="/espacios.html">Ver espacios premium <span class="arr">${ARROW}</span></a>`;
+
+/* ═══════ Inspirada en Guatemala (el logo: volcanes y ondas sonoras) ═══════ */
+document.getElementById('inspirada').innerHTML = `
+  <div class="inspira">${logoMark({ title: 'Isotipo de Arena Gallo' })}
+    <div><h2 class="h-sec">Inspirada en Guatemala</h2><p class="lede">En la forma de sus volcanes y también remite a niveles musicales y ondas sonoras.</p></div></div>
+  <div class="inspira-pano"><img src="${OFICIAL.home.volcanes}" alt="Volcanes de Guatemala al atardecer" width="1920" height="450" loading="lazy" decoding="async"></div>`;
