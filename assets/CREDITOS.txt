@@ -1,0 +1,3 @@
+Personajes: Universal Base Characters por Quaternius (CC0) https://quaternius.com
+Texturas: ambientCG (CC0) https://ambientcg.com — Concrete034, Fabric030, Plastic006, Metal032
+HDRI: Poly Haven (CC0) https://polyhaven.com — empty_warehouse_01

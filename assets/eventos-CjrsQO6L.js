@@ -1,0 +1,12 @@
+import{m as h,r as n,x as f,y as $,z as g,d as b,h as v,f as y,w as x,s as w}from"./chrome-T4cV4kVc.js";/* empty css              */import{b as E}from"./media-C0Tm4nKI.js";h("eventos");const L=new URLSearchParams(location.search);let s=L.get("tipo")||"todos";s!=="todos"&&!n(s)&&(s="todos");const d=f(),A={id:"todos",label:"Todo",color:"#f3eee6"},i=document.getElementById("tipos"),c=document.getElementById("grid");function p(){i.innerHTML=[A,...$].map(t=>{const e=d.filter(o=>t.id==="todos"||o.tipo===t.id).length,a=s===t.id;return`<button type="button" data-t="${t.id}" aria-pressed="${a}" style="--c:${t.color}" ${e?"":"disabled"}>${t.label}<sup>${e}</sup></button>`}).join(""),i.querySelectorAll("button").forEach(t=>t.addEventListener("click",()=>{s=t.dataset.t;const e=new URL(location.href);s==="todos"?e.searchParams.delete("tipo"):e.searchParams.set("tipo",s),history.replaceState(null,"",e),p(),u()}))}function m(t){const e=w(t);return e.soldOut?{cls:"agotado",txt:"Agotado"}:e.open?{cls:"abierta",txt:"A la venta"}:e.locked?{cls:"bloqueada",txt:`Abre en ${e.left.short}`}:{cls:"cerrada",txt:"Venta cerrada"}}function u(){const t=d.filter(a=>s==="todos"||a.tipo===s),e=n(s);document.getElementById("count").textContent=s==="todos"?`${t.length} fechas en Arena Gallo, de la más cercana a la más lejana.`:`${t.length} ${t.length===1?"fecha":"fechas"} de ${e.label.toLowerCase()}.`,c.innerHTML=t.map(a=>{const o=n(a.tipo),l=m(a),r=g(a.date);return`<a class="evcard${a.soldOut?" out":""}" href="/evento.html?id=${a.id}">
+      <div class="poster">
+        <img src="${E(a.id)}" alt="" width="576" height="720" loading="lazy">
+        <div class="tint"></div>
+        <div class="when"><span>${b(a.date).split(" ")[0]}</span><b>${r.day.padStart(2,"0")}</b><span>${r.mon}</span></div>
+        <span class="tag" style="background:${o.color};color:#12100e">${o.single}</span>
+        <h3>${a.name}</h3>
+      </div>
+      <div class="info">
+        <div class="row"><span>${v(a.date)} · puertas ${a.doors}</span><span>desde <b>${y(x(a))}</b></span></div>
+        <span class="pill ${l.cls}" data-badge="${a.id}">${l.txt}</span>
+      </div></a>`}).join("")||'<p class="muted">No hay fechas de este tipo por ahora.</p>'}p();u();setInterval(()=>{c.querySelectorAll("[data-badge]").forEach(t=>{const e=m(d.find(a=>a.id===t.dataset.badge));t.textContent!==e.txt&&(t.className="pill "+e.cls,t.textContent=e.txt)})},1e3);

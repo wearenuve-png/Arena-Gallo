@@ -1,0 +1,3 @@
+import{m as o,p as n,n as i,d as l}from"./chrome-T4cV4kVc.js";/* empty css              */import{t as r}from"./ticket-CgAOvV_a.js";o("boletos");const t=document.getElementById("list"),s=n().sort((e,a)=>e.date-a.date||e.n-a.n);if(s.length)t.innerHTML=s.map(r).join("");else{const e=i();t.style.marginTop="0",t.innerHTML=`<div class="empty">
+    <div><h2>Todavía no tienes boletos.</h2><p>El próximo evento es ${e.name}, el ${l(e.date).toLowerCase()}. Cuando compres, tus boletos aparecen aquí.</p></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn btn-red" href="/evento.html?id=${e.id}">Ver ${e.name}</a><a class="btn btn-ghost" href="/eventos.html">Toda la cartelera</a></div></div>`}

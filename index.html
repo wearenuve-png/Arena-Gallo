@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d0c0b">
+<style>html{background:#0d0c0b;color-scheme:dark}html[data-theme=light]{background:#f4f1ec;color-scheme:light}</style>
+<script>try{if(localStorage.getItem('ag_theme')==='light'){document.documentElement.dataset.theme='light';document.querySelector('meta[name="theme-color"]').content='#f4f1ec';}}catch(e){}</script>
+<title>Arena Gallo · Boletos</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="description" content="Compra boletos para Arena Gallo, Ciudad Cayalá. Recorre el recinto y elige tu asiento en 3D.">
+  <script type="module" crossorigin src="/assets/index-CCtS7zTR.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/chrome-T4cV4kVc.js">
+  <link rel="modulepreload" crossorigin href="/assets/salebox-BfFhaiF7.js">
+  <link rel="modulepreload" crossorigin href="/assets/media-C0Tm4nKI.js">
+  <link rel="stylesheet" crossorigin href="/assets/chrome-zQ-onQ7J.css">
+  <link rel="stylesheet" crossorigin href="/assets/index-B3fPHNob.css">
+  <link rel="stylesheet" crossorigin href="/assets/sitio-BFZtzJEM.css">
+</head>
+<body>
+<div class="intro" id="intro" hidden><div class="intro-in" id="introLogo"></div><p class="intro-tag">Ciudad Cayalá · Guatemala</p></div>
+<main>
+  <section id="recorrido" class="rec" aria-label="Recorrido por Arena Gallo">
+    <div class="rec-stage">
+      <video id="vid" muted playsinline preload="auto" poster="/media/poster.jpg" aria-label="Recorrido en video: de la vista aérea a la entrada y al interior del recinto"></video>
+      <div class="rec-shade"></div>
+      <div class="rec-copy" id="copy">
+        <h1 id="title">Aquí, Guatemala<br>vibra más alto.</h1>
+        <p id="sub">Arena Gallo, en Ciudad Cayalá. Desliza para entrar antes de elegir tu lugar.</p>
+      </div>
+      <div class="rec-end" id="end" hidden>
+        <p class="rec-end-k">Elige tu lugar</p>
+        <h2 id="endTitle"></h2>
+        <p class="rec-end-w" id="endWhen"></p>
+        <nav class="rec-zlist" id="zlist" aria-label="Zonas del recinto"></nav>
+      </div>
+      <div class="rec-track" aria-hidden="true"><ol id="rail"></ol><div class="rail"><i id="bar"></i></div></div>
+      <div class="rec-hint" id="hint"><span></span>Desliza para entrar</div>
+      <div class="rec-loader" id="loader" role="status">Cargando recorrido…</div>
+    </div>
+  </section>
+
+  <section class="sec" id="proximo" aria-label="Próximo evento"></section>
+  <section class="sec" id="tipos" aria-label="Tipos de eventos"></section>
+  <section class="sec" id="recinto" aria-label="La arena"></section>
+  <section class="sec" id="vivir" aria-label="Espacios"></section>
+  <section class="sec" id="inspirada" aria-label="Inspirada en Guatemala"></section>
+</main>
+</body>
+</html>
